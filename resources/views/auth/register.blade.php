@@ -32,7 +32,7 @@
         <div class="container">
             <div class="login-content">
                 <div class="login-logo">
-                    <a href="index.html">
+                    <a href="#">
                         <img class="align-content" src="images/logo.png" alt="">
                     </a>
                 </div>
