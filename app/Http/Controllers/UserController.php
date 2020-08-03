@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $items = User::role('petugas')->paginate(10);
+        $items = User::role(['petugas', 'admin', 'headmaster'])->paginate(10);
 
         $view = [
             'items' => $items

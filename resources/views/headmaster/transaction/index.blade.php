@@ -47,7 +47,6 @@
                                 <th>Keterlambatan</th>
                                 <th>Denda</th>
                                 <th>Status</th>
-                                <th>Option</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,9 +60,6 @@
                                     <td>{!! $item->keterlambatan !!}</td>
                                     <td>{!! $item->denda !!}</td>
                                     <td>{!! $item->status_formatted !!}</td>
-                                    <td>
-                                        <button type="button" data-link="{{ route('admin.transaction.return-book', $item->id) }}" class="btn btn-primary btn-sm kembalikan"> <i class="fa fa-location-arrow"></i> Pengembalian</button>
-                                    </td>
                                 </tr>
                             @empty
                                 <tr>
@@ -78,41 +74,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-    <script>
-        jQuery(function ($) {
-            $('.kembalikan').on('click', function (e) {
-                e.preventDefault();
-                var el = $(this);
-
-                swal({
-                    title: "Apakah anda yakin buku ini telah kembali?",
-                    icon: "warning",
-                    text: "Data akan tersimpan di Database!",
-                    buttons: true,
-                }).then(function () {
-                    var formdata = document.createElement("form");
-                    formdata.setAttribute("method", "POST");
-                    formdata.setAttribute("action", el.data('link'));
-
-                    var hiddenField = document.createElement("input");
-                    hiddenField.setAttribute("type", "hidden");
-                    hiddenField.setAttribute("name", "_token");
-                    hiddenField.setAttribute("value", "{{ csrf_token() }}");
-
-                    var hiddenField2 = document.createElement("input");
-                    hiddenField2.setAttribute("type", "hidden");
-                    hiddenField2.setAttribute("name", "_method");
-                    hiddenField2.setAttribute("value", "PATCH");
-
-                    formdata.appendChild(hiddenField);
-                    formdata.appendChild(hiddenField2);
-                    document.body.appendChild(formdata);
-                    formdata.submit();
-                });
-            });
-        });
-    </script>
 @endsection
