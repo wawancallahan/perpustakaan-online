@@ -6,11 +6,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login Admin Perpustakaan</title>
+    <title>Login Perpustakaan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     <!-- CSRF Token -->
-     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -36,13 +36,9 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            @foreach ($errors->all() as $error)
-                                <div>{{ $error }}</div>
-                            @endforeach
-                        </div>
-                    @endif
+
+                    @include ('admin.layout.flash')
+
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group">
@@ -55,6 +51,10 @@
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Login</button>
                     </form>
+
+                    <div class="register-link m-t-15 text-center mt-4">
+                        <p>Jika belum punya akun, Silahkan klik <a href="{{ route('register') }}">Daftar</a></p>
+                    </div>
                 </div>
             </div>
         </div>
