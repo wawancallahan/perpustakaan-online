@@ -28,6 +28,18 @@
                     @endrole
                 @endrole
 
+                @role('siswa')
+                    <li class="{{ request()->is('siswa/dashboard') ? 'active' : '' }}">
+                        <a href="{{ route('siswa.dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    </li>
+                    <li class="{{ request()->is('siswa/book') || request()->is('siswa/book/*') ? 'active' : '' }}">
+                        <a href="{{ route('siswa.book.index') }}"> <i class="menu-icon fa fa-book"></i>Buku </a>
+                    </li>
+                    <li class="{{ request()->is('siswa/history') || request()->is('siswa/history/*') ? 'active' : '' }}">
+                        <a href="{{ route('siswa.history.index') }}"> <i class="menu-icon fa fa-tasks"></i>Pinjaman </a>
+                    </li>
+                @endrole
+
                 @role('headmaster')
                     <li class="{{ request()->is('headmaster/dashboard') ? 'active' : '' }}">
                         <a href="{{ route('headmaster.dashboard') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>

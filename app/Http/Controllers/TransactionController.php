@@ -17,8 +17,8 @@ class TransactionController extends Controller
         $items = Transaction::with(['book', 'siswa'])->orderBy('status', 'asc')->orderBy('tanggal_kembali')->paginate(10);
         
         $items->getCollection()->transform(function ($item) use ($denda) {
-            $keterlambatan_hari = $item->tanggal_pinjam->gt($item->tanggal_kembali) 
-                                ? $item->tanggal_pinjam->diff($item->tanggal_kembali)->days 
+            $keterlambatan_hari = $item->tanggal_pinjam->startOfDay()->gt($item->tanggal_kembali) 
+                                ? $item->tanggal_pinjam->diff($item->tanggal_kembali->startOfDay())->days 
                                 : 0;
 
             $item->keterlambatan = '<span class="badge badge-' . ($keterlambatan_hari > 0 ? "danger" : "success") . '">' . $keterlambatan_hari . ' hari</span>';

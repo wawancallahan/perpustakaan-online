@@ -21,6 +21,11 @@ class Transaction extends Model
         'status'
     ];
 
+    public function scopeOnThisSiswa($query)
+    {
+        return $query->where('siswa_id', auth()->user()->siswa->id);
+    }
+
     public function book()
     {
         return $this->belongsTo(Book::class, 'book_id');
@@ -33,12 +38,12 @@ class Transaction extends Model
 
     public function getTanggalPinjamFormattedAttribute()
     {
-        return $this->tanggal_pinjam->format('Y-m-d H:i:s');
+        return $this->tanggal_pinjam->format('Y-m-d');
     }
 
     public function getTanggalKembaliFormattedAttribute()
     {
-        return $this->tanggal_kembali->format('Y-m-d H:i:s');
+        return $this->tanggal_kembali->format('Y-m-d');
     }
 
     public function getStatusFormattedAttribute()
