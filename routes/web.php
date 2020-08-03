@@ -49,13 +49,13 @@ Route::group(['middleware' => 'role:siswa', 'prefix' => 'siswa', 'as' => 'siswa.
 
     Route::get('dashboard', 'Siswa\SiswaController@dashboard')->name('dashboard');
 
-    Route::group(['prefix' => 'book', 'as' => 'book.'], function () {
+    Route::group(['middleware' => 'siswaActive', 'prefix' => 'book', 'as' => 'book.'], function () {
         Route::get('', 'Siswa\BookController@index')->name('index');
         Route::get('book/{id}/borrow', 'Siswa\BookController@borrow')->name('borrow');
         Route::post('book/{id}/borrow', 'Siswa\BookController@borrowStore')->name('borrow.store');
     });
 
-    Route::get('history', 'Siswa\HistoryController@index')->name('history.index');
+    Route::get('history', 'Siswa\HistoryController@index')->name('history.index')->middleware('siswaActive');
 });
 
 Route::group(['middleware' => 'role:headmaster', 'prefix' => 'headmaster', 'as' => 'headmaster.'], function () {
