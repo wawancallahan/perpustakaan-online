@@ -12,12 +12,12 @@
                 <div class="card-body">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-1">
-                            <i class="pe-7s-cash"></i>
+                            <i class="fa fa-book"></i>
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
-                                <div class="stat-text">$<span class="count">23569</span></div>
-                                <div class="stat-heading">Revenue</div>
+                                <div class="stat-text"><span class="count">{{ $transactions }}</span></div>
+                                <div class="stat-heading">Buku Dipinjam</div>
                             </div>
                         </div>
                     </div>
@@ -25,4 +25,16 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+            <div class="col-sm-12">
+                @foreach ($transactionTelat as $transaction)
+                    <div class="alert alert-danger">
+                        <h4 class="alert-heading">Informasi Pengembalian!</h4>
+                        <p>Buku {{ $transaction->book->judul }} harus segera dikembalian!</p>
+                        <p class="mb-0">Tanggal Kembali : {{ $transaction->tanggal_kembali_formatted }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
 @endsection
