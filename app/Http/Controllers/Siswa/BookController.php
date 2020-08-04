@@ -45,7 +45,7 @@ class BookController extends Controller
             $tanggal_pinjam = Carbon::now()->startOfDay();
             $tanggal_kembali = Carbon::parse($request->tanggal_kembali)->startOfDay();
 
-            Transaction::create([
+            $transaction = Transaction::create([
                 'tanggal_pinjam' => $tanggal_pinjam,
                 'tanggal_kembali' => $tanggal_kembali,
                 'book_id' => $item->id,
@@ -53,16 +53,16 @@ class BookController extends Controller
                 'status' => 0
             ]);
 
-            $waktu = $tanggal_pinjam->diff($tanggal_kembali)->days;
+            // $waktu = $tanggal_pinjam->diff($tanggal_kembali)->days;
 
             DB::commit();
 
-            session()->flash('flash', [
-                'type' => 'success',
-                'message' => 'Buku berhasil dipinjam dengan waktu ' . $waktu . ' hari'
-            ]);
+            // session()->flash('flash', [
+            //     'type' => 'success',
+            //     'message' => 'Buku berhasil dipinjam dengan waktu ' . $waktu . ' hari'
+            // ]);
 
-            return redirect()->route('siswa.book.index');
+            return redirect()->route('siswa.book.borrow.print', $transaction->id);
 
         } catch (Exception $e) {
             session()->flash('flash', [
@@ -72,5 +72,25 @@ class BookController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function borrowPrint($id)
+    {
+        $item = Transaction::with('siswa')->find($id);
+
+        if ($item === null) {
+            session()->flash('flash', [
+                'type' => 'danger',
+                'message' => 'Data Tidak Ditemukan'
+            ]);
+
+            return redirect()->route('siswa.book.index');
+        }
+
+        $view = [
+            'item' => $item
+        ];
+
+        return view('print.pinjam')->with($view);
     }
 }
