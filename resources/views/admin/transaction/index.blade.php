@@ -80,7 +80,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Data Tidak Ditemukan</td>
+                                    <td colspan="9" class="text-center">Data Tidak Ditemukan</td>
                                 </tr>
                             @endforelse
                         </tbody>
