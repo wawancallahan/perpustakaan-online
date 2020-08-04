@@ -25,18 +25,24 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+
+    <style>
+        .logo {
+            width: 6em;
+        }
+    </style>
+    
 </head>
 <body class="bg-dark">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
-                <div class="login-logo">
-                    <a href="#">
-                        <img class="align-content" src="images/logo.png" alt="">
-                    </a>
-                </div>
                 <div class="login-form">
+                    <div class="text-center form-group">
+                        <img src="{{ asset('images/logo.jpg') }}" alt="" class="logo">
+                    </div>
+                    <h4>Registrasi Akun Anggota</h4>
                     
                     @include ('admin.layout.flash')
 
