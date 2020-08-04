@@ -53,16 +53,17 @@ class BookController extends Controller
                 'status' => 0
             ]);
 
-            // $waktu = $tanggal_pinjam->diff($tanggal_kembali)->days;
+            $waktu = $tanggal_pinjam->diff($tanggal_kembali)->days;
 
             DB::commit();
 
-            // session()->flash('flash', [
-            //     'type' => 'success',
-            //     'message' => 'Buku berhasil dipinjam dengan waktu ' . $waktu . ' hari'
-            // ]);
+            session()->flash('flash', [
+                'type' => 'success',
+                'message' => 'Buku berhasil dipinjam dengan waktu ' . $waktu . ' hari',
+                'print' => route('siswa.book.borrow.print', $transaction->id)
+            ]);
 
-            return redirect()->route('siswa.book.borrow.print', $transaction->id);
+            return redirect()->route('siswa.book.index');
 
         } catch (Exception $e) {
             session()->flash('flash', [

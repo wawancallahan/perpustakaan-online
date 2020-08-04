@@ -88,3 +88,11 @@
         </div>
     </div>
 @endsection
+
+@section('js')
+    <script>
+        @if(session()->get('flash.print') !== null)
+            window.open('{{ session()->get("flash.print") }}', '_blank');
+        @endif
+    </script>
+@endsection
