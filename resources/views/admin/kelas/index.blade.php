@@ -7,7 +7,7 @@
                 <div class="col-sm-4">
                     <div class="page-header float-left">
                         <div class="page-title">
-                            <h1>Peminjaman</h1>
+                            <h1>Kelas</h1>
                         </div>
                     </div>
                 </div>
@@ -15,7 +15,7 @@
                     <div class="page-header float-right">
                         <div class="page-title">
                             <ol class="breadcrumb text-right">
-                                <li class="active"><a href="#">Peminjaman</a></li>
+                                <li class="active"><a href="#">Kelas</a></li>
                             </ol>
                         </div>
                     </div>
@@ -31,9 +31,13 @@
 
             @include ('admin.layout.flash')
 
+            <div class="form-group">
+                <a href="{{ route('admin.kelas.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Kelas</a>
+            </div>
+
             <div class="card">
                 <div class="card-header">
-                    <strong class="card-title">Daftar Peminjaman</strong>
+                    <strong class="card-title">Daftar Kelas</strong>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -53,28 +57,25 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Tgl Pinjam</th>
-                                <th>Tgl Kembali</th>
-                                <th>Buku</th>
-                                <th>Keterlambatan</th>
-                                <th>Denda</th>
-                                <th>Status</th>
+                                <th>Nama</th>
+                                <th>Option</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($items as $item)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->tanggal_pinjam_formatted }}</td>
-                                    <td>{{ $item->tanggal_kembali_formatted }}</td>
-                                    <td>{{ $item->book->judul }}</td>
-                                    <td>{!! $item->keterlambatan !!}</td>
-                                    <td>{!! $item->denda !!}</td>
-                                    <td>{!! $item->status_formatted !!}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.kelas.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                                        <button type="button" data-link="{{ route('admin.kelas.destroy', $item->id) }}" class="btn btn-danger btn-sm hapus">
+                                            <i class="fa fa-trash"></i> Hapus
+                                        </button>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Data Tidak Ditemukan</td>
+                                    <td colspan="3" class="text-center">Data Tidak Ditemukan</td>
                                 </tr>
                             @endforelse
                         </tbody>
@@ -85,4 +86,42 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        jQuery(function ($) {
+            $('.hapus').on('click', function (e) {
+                e.preventDefault();
+                var el = $(this);
+
+                swal({
+                    title: "Apakah anda yakin untuk menghapus data ini?",
+                    icon: "warning",
+                    text: "Data tidak dapat dikembalian setelah terhapus!",
+                    dangerMode: true,
+                    buttons: true,
+                }).then(function () {
+                    var formdata = document.createElement("form");
+                    formdata.setAttribute("method", "POST");
+                    formdata.setAttribute("action", el.data('link'));
+
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", "_token");
+                    hiddenField.setAttribute("value", "{{ csrf_token() }}");
+
+                    var hiddenField2 = document.createElement("input");
+                    hiddenField2.setAttribute("type", "hidden");
+                    hiddenField2.setAttribute("name", "_method");
+                    hiddenField2.setAttribute("value", "DELETE");
+
+                    formdata.appendChild(hiddenField);
+                    formdata.appendChild(hiddenField2);
+                    document.body.appendChild(formdata);
+                    formdata.submit();
+                });
+            });
+        });
+    </script>
 @endsection

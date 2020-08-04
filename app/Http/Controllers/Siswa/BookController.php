@@ -77,7 +77,7 @@ class BookController extends Controller
 
     public function borrowPrint($id)
     {
-        $item = Transaction::with('siswa')->find($id);
+        $item = Transaction::with('siswa.kelas')->find($id);
 
         if ($item === null) {
             session()->flash('flash', [

@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $roles = Role::pluck('name');
+        $roles = Role::whereNotIn('name', ['siswa'])->pluck('name');
         $faker = Faker::create('id_ID');
 
         DB::transaction(function () use ($roles, $faker) {
@@ -29,18 +29,6 @@ class UserSeeder extends Seeder
                 ]);
                 
                 $user->syncRoles([$role]);
-
-                if ($role == 'siswa') {
-                    $user->siswa()->save(new Siswa([
-                        'nis' => $faker->uuid,
-                        'name' => $faker->name,
-                        'class' => $faker->numberBetween(1, 5),
-                        'gender' => $faker->boolean(50) ? 'L' : 'P',
-                        'phone' => $faker->phoneNumber,
-                        'address' => $faker->address,
-                        'status' => 1,
-                    ]));
-                }
             }
         });
     }

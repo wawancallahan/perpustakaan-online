@@ -18,6 +18,9 @@
                     <li class="{{ request()->is('admin/siswa') || request()->is('admin/siswa/*') ? 'active' : '' }}">
                         <a href="{{ route('admin.siswa.index') }}"> <i class="menu-icon fa fa-users"></i>Siswa </a>
                     </li>
+                    <li class="{{ request()->is('admin/kelas') || request()->is('admin/kelas/*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.kelas.index') }}"> <i class="menu-icon fa fa-hdd-o"></i>Kelas </a>
+                    </li>
                     @role('admin')
                         <li class="{{ request()->is('admin/user') || request()->is('admin/user/*') ? 'active' : '' }}">
                             <a href="{{ route('admin.user.index') }}"> <i class="menu-icon fa fa-user"></i>User </a>

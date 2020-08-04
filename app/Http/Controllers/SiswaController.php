@@ -8,6 +8,7 @@ use DB;
 use Exception;
 use App\Http\Requests\SiswaRequest;
 use App\User;
+use App\Models\Kelas;
 
 class SiswaController extends Controller
 {
@@ -18,7 +19,7 @@ class SiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $items = Siswa::filter($request)->paginate(10);
+        $items = Siswa::with('kelas')->filter($request)->paginate(10);
 
         $view = [
             'items' => $items
@@ -34,7 +35,13 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('admin.siswa.create');
+        $kelas = Kelas::get();
+
+        $view = [
+            'kelas' => $kelas
+        ];
+
+        return view('admin.siswa.create')->with($view);
     }
 
     /**
@@ -69,7 +76,7 @@ class SiswaController extends Controller
             Siswa::create([
                 'nis' => $request->nis,
                 'name' => $request->name,
-                'class' => $request->class,
+                'kelas_id' => $request->kelas_id,
                 'gender' => $request->gender,
                 'phone' => $request->phone,
                 'address' => $request->address,
@@ -115,9 +122,11 @@ class SiswaController extends Controller
     public function edit($id)
     {
         $item = Siswa::with('user')->findOrFail($id);
+        $kelas = Kelas::get();
 
         $view = [
-            'item' => $item
+            'item' => $item,
+            'kelas' => $kelas
         ];
 
         return view('admin.siswa.edit')->with($view);
@@ -151,7 +160,7 @@ class SiswaController extends Controller
             $item->update([
                 'nis' => $request->nis,
                 'name' => $request->name,
-                'class' => $request->class,
+                'kelas_id' => $request->kelas_id,
                 'gender' => $request->gender,
                 'phone' => $request->phone,
                 'address' => $request->address
@@ -311,7 +320,7 @@ class SiswaController extends Controller
 
     public function kartuAnggota($id)
     {
-        $item = Siswa::isActive()->find($id);
+        $item = Siswa::with('kelas')->isActive()->find($id);
 
         if ($item === null) {
             session()->flash('flash', [

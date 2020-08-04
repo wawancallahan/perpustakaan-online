@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-3">Kelas</div>
                 <div class="col-1">:</div>
-                <div class="col-8">{{ $item->siswa->class }}</div>
+                <div class="col-8">{{ $item->siswa->kelas->name ?? '-' }}</div>
             </div>
             <div class="row">
                 <div class="col-3">Telepon</div>

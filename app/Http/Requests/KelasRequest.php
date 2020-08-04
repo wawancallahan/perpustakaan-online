@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SiswaRequest extends FormRequest
+class KelasRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,8 @@ class SiswaRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'nis' => 'required',
-            'name' => 'required',
-            'kelas_id' => 'required',
-            'gender' => 'required',
-            'phone' => 'required',
-            'address' => 'nullable'
+            'name' => 'required'
         ];
-
-        if ($this->isMethod('POST')) {
-            $rules['password'] = 'required';
-        }
 
         return $rules;
     }

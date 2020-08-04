@@ -50,12 +50,17 @@
                         
                         <div class="form-group">
                             <label class="form-control-label">Kelas</label>
-                            <input type="text" name="class" placeholder="Kelas" class="form-control" required >
+                            <select name="kelas_id" id="kelas" class="form-control" required>
+                                <option value="">Pilih Kelas</option>
+                                @foreach ($kelas as $kelasItem)
+                                    <option value="{{ $kelasItem->id }}">{{ $kelasItem->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Jenis Kelamin</label>
-                            <select name="gender" id="gender" class="form-control">
+                            <select name="gender" id="gender" class="form-control" required>
                                 <option value="">Pilih Jenis Kelamin</option>
                                 <option value="L">Laki-Laki</option>
                                 <option value="P">Perempuan</option>
@@ -96,6 +101,13 @@
         jQuery(function($) {
             $('#gender').select2({
                 placeholder: 'Pilih Jenis Kelamin',
+                allowClear: false,
+                width: '100%',
+                theme: "bootstrap4"
+            });
+
+            $('#kelas').select2({
+                placeholder: 'Pilih Kelas',
                 allowClear: false,
                 width: '100%',
                 theme: "bootstrap4"

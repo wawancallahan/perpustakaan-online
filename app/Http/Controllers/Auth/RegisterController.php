@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use App\Models\Kelas;
 
 class RegisterController extends Controller
 {
@@ -55,7 +56,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nis' => 'required',
             'name' => 'required',
-            'class' => 'required',
+            'kelas_id' => 'required',
             'gender' => 'required',
             'phone' => 'required',
             'address' => 'nullable',
@@ -83,7 +84,7 @@ class RegisterController extends Controller
         Siswa::create([
             'nis' => $data['nis'],
             'name' => $data['name'],
-            'class' => $data['class'],
+            'kelas_id' => $data['kelas_id'],
             'gender' => $data['gender'],
             'phone' => $data['phone'],
             'address' => $data['address'],
@@ -92,6 +93,17 @@ class RegisterController extends Controller
         ]);
 
         return $user;
+    }
+
+    public function showRegistrationForm()
+    {
+        $kelas = Kelas::get();
+
+        $view = [
+            'kelas' => $kelas
+        ];
+
+        return view('auth.register')->with($view);
     }
 
     public function register(Request $request) {

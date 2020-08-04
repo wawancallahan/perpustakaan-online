@@ -32,6 +32,7 @@ Route::group(['middleware' => 'role:admin|petugas', 'prefix' => 'admin', 'as' =>
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::resource('book', 'BookController');
     Route::resource('siswa', 'SiswaController');
+    Route::resource('kelas', 'KelasController');
     Route::patch('siswa/{id}/active', 'SiswaController@active')->name('siswa.active');
     Route::patch('siswa/{id}/unactive', 'SiswaController@unactive')->name('siswa.unactive');
     Route::get('siswa/{id}/kartu-anggota', 'SiswaController@kartuAnggota')->name('siswa.kartu-anggota');

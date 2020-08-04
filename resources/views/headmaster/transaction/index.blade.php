@@ -44,7 +44,7 @@
                                 </div>
                                 <input type="text" name="q" class="form-control" placeholder="Cari..." maxlength="255" value="{{ request()->get('q') }}">
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
                                 </div>
                             </div>
                         </form>

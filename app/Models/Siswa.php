@@ -12,7 +12,7 @@ class Siswa extends Model
     protected $fillable = [
         'nis',
         'name',
-        'class',
+        'kelas_id',
         'gender',
         'phone',
         'address',
@@ -24,6 +24,10 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function kelas() {
+        return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+
     public function scopeIsActive($query) {
         $query->where('status', 1);
     }
@@ -33,9 +37,11 @@ class Siswa extends Model
             $query->where(function ($query) use ($request) {
                 $query->where('nis', 'LIKE', '%' . $request->get('q') . '%')
                     ->orWhere('name', 'LIKE', '%' . $request->get('q') . '%')
-                    ->orWhere('class', 'LIKE', '%' . $request->get('q') . '%')
                     ->orWhere('phone', 'LIKE', '%' . $request->get('q') . '%')
-                    ->orWhere('address', 'LIKE', '%' . $request->get('q') . '%');
+                    ->orWhere('address', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhereHas('kelas', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', '%' . $request->get('q') . '%');
+                    });
             });
         }
     }
