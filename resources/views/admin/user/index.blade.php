@@ -59,6 +59,7 @@
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>Username</th>
+                                <th>Tipe</th>
                                 <th>Option</th>
                             </tr>
                         </thead>
@@ -68,6 +69,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->username }}</td>
+                                    <th>{{ $item->roles->first()->name ?? '-' }}</th>
                                     <td>
                                         <a href="{{ route('admin.user.edit', $item->id) }}" class="btn btn-warning btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                         <button type="button" data-link="{{ route('admin.user.destroy', $item->id) }}" class="btn btn-danger btn-warning hapus">

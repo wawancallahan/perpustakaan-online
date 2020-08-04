@@ -7,6 +7,7 @@ use App\User;
 use App\Http\Requests\UserRequest;
 use DB;
 use Exception;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $items = User::filter($request)->role(['petugas', 'admin', 'headmaster'])->paginate(10);
+        $items = User::with('roles')->filter($request)->role(['petugas', 'admin', 'headmaster'])->paginate(10);
 
         $view = [
             'items' => $items
@@ -33,7 +34,13 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $roles = Role::whereIn('name', ['admin', 'petugas', 'headmaster'])->get();
+
+        $view = [
+            'roles' => $roles
+        ];
+
+        return view('admin.user.create')->with($view);
     }
 
     /**
@@ -62,10 +69,10 @@ class UserController extends Controller
                 'name' => $request->name,
                 'username' => $request->username,
                 'password' => bcrypt($request->password),
-                'active' => 1,
+                'is_active' => 1,
             ]);
 
-            $user->assignRole('petugas');
+            $user->assignRole($request->role);
 
             DB::commit();
 
@@ -106,8 +113,11 @@ class UserController extends Controller
     {
         $item = User::findOrFail($id);
 
+        $roles = Role::whereIn('name', ['admin', 'petugas', 'headmaster'])->get();
+
         $view = [
-            'item' => $item
+            'item' => $item,
+            'roles' => $roles
         ];
 
         return view('admin.user.edit')->with($view);
@@ -150,6 +160,8 @@ class UserController extends Controller
             }
 
             $item->update();
+
+            $item->syncRoles([$request->role]);
 
             DB::commit();
 

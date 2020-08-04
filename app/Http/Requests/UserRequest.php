@@ -25,7 +25,8 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'name' => 'required',
-            'username' => 'required'
+            'username' => 'required',
+            'role' => 'required'
         ];
 
         if ($this->isMethod('POST')) {

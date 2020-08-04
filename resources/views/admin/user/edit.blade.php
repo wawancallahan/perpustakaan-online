@@ -57,6 +57,16 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="form-control-label">Tipe</label>
+                            <select name="role" id="role" class="form-control" required>
+                                <option value="">Pilih Tipe</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}" {{ $role->id == $item->roles->first()->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group mt-5">
                             <button type="button" class="btn btn-primary" id="simpan">Simpan</button>
                             <a href="{{ route('admin.user.index') }}" class="btn btn-default">Batal</a>
@@ -72,6 +82,13 @@
 @section('js')
     <script>
         jQuery(function($) {
+            $('#role').select2({
+                placeholder: 'Pilih Tipe',
+                allowClear: false,
+                width: '100%',
+                theme: "bootstrap4"
+            });
+            
             $('#simpan').on('click', function (e) {
                 e.preventDefault();
 
