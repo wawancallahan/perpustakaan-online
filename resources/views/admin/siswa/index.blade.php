@@ -60,7 +60,6 @@
                                     <th>#</th>
                                     <th>NIS</th>
                                     <th>Nama</th>
-                                    <th>Angkatan</th>
                                     <th>Kelas</th>
                                     <th>JK</th>
                                     <th>Telepon</th>
@@ -75,7 +74,6 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->nis }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->generation }}</td>
                                         <td>{{ $item->class }}</td>
                                         <td>{{ $item->gender_formatted }}</td>
                                         <td>{{ $item->phone }}</td>

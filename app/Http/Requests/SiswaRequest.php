@@ -26,7 +26,6 @@ class SiswaRequest extends FormRequest
         $rules = [
             'nis' => 'required',
             'name' => 'required',
-            'generation' => 'required',
             'class' => 'required',
             'gender' => 'required',
             'phone' => 'required',

@@ -50,11 +50,6 @@
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-control-label">Angkatan</label>
-                            <input type="text" name="generation" placeholder="Angkatan" class="form-control" value="{{ $item->generation }}" required>
-                        </div>
-                        
-                        <div class="form-group">
                             <label class="form-control-label">Kelas</label>
                             <input type="text" name="class" placeholder="Kelas" class="form-control" value="{{ $item->class }}" required >
                         </div>

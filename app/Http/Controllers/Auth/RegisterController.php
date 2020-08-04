@@ -55,7 +55,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'nis' => 'required',
             'name' => 'required',
-            'generation' => 'required',
             'class' => 'required',
             'gender' => 'required',
             'phone' => 'required',
@@ -84,7 +83,6 @@ class RegisterController extends Controller
         Siswa::create([
             'nis' => $data['nis'],
             'name' => $data['name'],
-            'generation' => $data['generation'],
             'class' => $data['class'],
             'gender' => $data['gender'],
             'phone' => $data['phone'],

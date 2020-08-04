@@ -35,11 +35,6 @@
                 <div class="col-8">{{ $item->siswa->name }}</div>
             </div>
             <div class="row">
-                <div class="col-3">Angkatan</div>
-                <div class="col-1">:</div>
-                <div class="col-8">{{ $item->siswa->generation }}</div>
-            </div>
-            <div class="row">
                 <div class="col-3">Kelas</div>
                 <div class="col-1">:</div>
                 <div class="col-8">{{ $item->siswa->class }}</div>

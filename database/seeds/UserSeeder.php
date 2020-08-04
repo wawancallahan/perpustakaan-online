@@ -34,7 +34,6 @@ class UserSeeder extends Seeder
                     $user->siswa()->save(new Siswa([
                         'nis' => $faker->uuid,
                         'name' => $faker->name,
-                        'generation' => $faker->numberBetween(2000, 2020),
                         'class' => $faker->numberBetween(1, 5),
                         'gender' => $faker->boolean(50) ? 'L' : 'P',
                         'phone' => $faker->phoneNumber,

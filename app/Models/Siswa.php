@@ -12,7 +12,6 @@ class Siswa extends Model
     protected $fillable = [
         'nis',
         'name',
-        'generation',
         'class',
         'gender',
         'phone',
@@ -34,7 +33,6 @@ class Siswa extends Model
             $query->where(function ($query) use ($request) {
                 $query->where('nis', 'LIKE', '%' . $request->get('q') . '%')
                     ->orWhere('name', 'LIKE', '%' . $request->get('q') . '%')
-                    ->orWhere('generation', 'LIKE', '%' . $request->get('q') . '%')
                     ->orWhere('class', 'LIKE', '%' . $request->get('q') . '%')
                     ->orWhere('phone', 'LIKE', '%' . $request->get('q') . '%')
                     ->orWhere('address', 'LIKE', '%' . $request->get('q') . '%');

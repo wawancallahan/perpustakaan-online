@@ -69,7 +69,6 @@ class SiswaController extends Controller
             Siswa::create([
                 'nis' => $request->nis,
                 'name' => $request->name,
-                'generation' => $request->generation,
                 'class' => $request->class,
                 'gender' => $request->gender,
                 'phone' => $request->phone,
@@ -152,7 +151,6 @@ class SiswaController extends Controller
             $item->update([
                 'nis' => $request->nis,
                 'name' => $request->name,
-                'generation' => $request->generation,
                 'class' => $request->class,
                 'gender' => $request->gender,
                 'phone' => $request->phone,
