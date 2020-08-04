@@ -27,14 +27,22 @@
     </div>
 
     <div class="row">
-            <div class="col-sm-12">
-                @foreach ($transactionTelat as $transaction)
-                    <div class="alert alert-danger">
-                        <h4 class="alert-heading">Informasi Pengembalian!</h4>
-                        <p>Buku {{ $transaction->book->judul }} harus segera dikembalian!</p>
-                        <p class="mb-0">Tanggal Kembali : {{ $transaction->tanggal_kembali_formatted }}</p>
-                    </div>
-                @endforeach
-            </div>
+        <div class="col-sm-12">
+
+            @if ( ! $isActive)
+                <div class="alert alert-warning">
+                    <h4 class="alert-heading">Informasi Akun!</h4>
+                    <p class="mb-0">Akun Anda Dalam Tahap Validasi, Mohon Hubungi Petugas Perpustakaan!</p>
+                </div>
+            @endif
+
+            @foreach ($transactionTelat as $transaction)
+                <div class="alert alert-danger">
+                    <h4 class="alert-heading">Informasi Pengembalian!</h4>
+                    <p>Buku {{ $transaction->book->judul }} harus segera dikembalian!</p>
+                    <p class="mb-0">Tanggal Kembali : {{ $transaction->tanggal_kembali_formatted }}</p>
+                </div>
+            @endforeach
         </div>
+    </div>
 @endsection

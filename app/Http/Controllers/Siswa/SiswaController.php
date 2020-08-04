@@ -19,9 +19,12 @@ class SiswaController extends Controller
                                         ->where('tanggal_kembali', '<=', $today->toDateString())
                                         ->get();
 
+        $isActive = auth()->user()->is_active == 1;
+
         $view = [
             'transactions' => $transactions,
-            'transactionTelat' => $transactionTelat
+            'transactionTelat' => $transactionTelat,
+            'isActive' => $isActive
         ];
 
         return view('siswa.dashboard')->with($view);
