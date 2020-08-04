@@ -20,7 +20,7 @@
         <div class="mb-2">
             <div class="text-center">
                 <h4>Peminjaman Buku</h4>
-                <p class="m-b">SMP Negeri Zero One Kamen Rider</p>
+                <p class="m-b">SMA NEGERI 2 MARANGKAYU</p>
             </div>
         </div>
         <div class="mt-1">

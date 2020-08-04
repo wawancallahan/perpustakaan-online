@@ -21,8 +21,8 @@
 
         .logo-kartu {
             position: relative;
-            transform: translate(50%, 0%);
-            width: 3em;
+            transform: translate(10%, -5%);
+            width: 5em;
         }
     </style>
 </head>
@@ -31,12 +31,12 @@
         <div class="row mb-1">
             <div class="col-2">
                 <div class="box-logo">
-                    <img src="{{ asset('images/logo_kartu.jpg') }}" alt="" class="logo-kartu">
+                    <img src="{{ asset('images/logo.jfif') }}" alt="" class="logo-kartu">
                 </div>
             </div>
             <div class="col-10 text-center">
                 <h4>Kartu Anggota Perpustakaan</h4>
-                <p class="m-b">SMP Negeri Zero One Kamen Rider</p>
+                <p class="m-b">SMA NEGERI 2 MARANGKAYU</p>
             </div>
         </div>
         <hr class="mb-0 mt-0">
