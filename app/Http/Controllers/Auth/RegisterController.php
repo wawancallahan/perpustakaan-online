@@ -72,13 +72,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'name' => $data['name'], 
             'username' => $data['nis'], 
             'password' => $data['password'],
             'is_active' => 0
         ]);
+
+        $user->assignRole('siswa');
 
         Siswa::create([
             'nis' => $data['nis'],
@@ -125,6 +126,6 @@ class RegisterController extends Controller
         $this->guard()->login($user);
     
         // Success redirection - which will be attribute `$redirectTo`
-        return redirect($this->redirectPath());
+        return redirect()->route('siswa.dashboard');
     }
 }
