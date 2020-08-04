@@ -18,6 +18,10 @@ Route::get('', function () {
     return redirect()->route('login');
 });
 
+Route::get('kartu-anggota', function () {
+    return view('print.kartu_anggota');
+});
+
 Route::get('logout', 'Auth\LoginController@logout');
 
 Route::group(['middleware' => 'role:admin|petugas', 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -30,6 +34,7 @@ Route::group(['middleware' => 'role:admin|petugas', 'prefix' => 'admin', 'as' =>
     Route::resource('siswa', 'SiswaController');
     Route::patch('siswa/{id}/active', 'SiswaController@active')->name('siswa.active');
     Route::patch('siswa/{id}/unactive', 'SiswaController@unactive')->name('siswa.unactive');
+    Route::get('siswa/{id}/kartu-anggota', 'SiswaController@kartuAnggota')->name('siswa.kartu-anggota');
 
     Route::group(['middleware' => 'role:admin'], function () {
         Route::resource('config', 'ConfigController')->only(['index', 'edit', 'update']);

@@ -83,9 +83,10 @@
                                         <td>{!! $item->status_formatted !!}</td>
                                         <td>
                                             @if ($item->status == 0)
-                                                <button type="button" data-link="{{ route('admin.siswa.active', $item->id) }}" class="btn btn-primary aktif btn-sm">Aktifkan</button>
+                                                <button type="button" data-link="{{ route('admin.siswa.active', $item->id) }}" class="btn btn-primary aktif btn-sm"><i class="fa fa-check"></i> Aktifkan</button>
                                             @elseif ($item->status == 1)
-                                                <button type="button" data-link="{{ route('admin.siswa.unactive', $item->id) }}" class="btn btn-warning non-aktif btn-sm">NonAktifkan</button>
+                                                <a href="{{ route('admin.siswa.kartu-anggota', $item->id) }}" class="btn btn-info btn-sm" target="_blank"> <i class="fa fa-qrcode"></i> Kartu Anggota</a>
+                                                <button type="button" data-link="{{ route('admin.siswa.unactive', $item->id) }}" class="btn btn-warning non-aktif btn-sm"><i class="fa fa-times"></i> NonAktifkan</button>
                                             @endif
                                             <a href="{{ route('admin.siswa.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
                                             <button type="button" data-link="{{ route('admin.siswa.destroy', $item->id) }}" class="btn btn-danger btn-sm hapus">

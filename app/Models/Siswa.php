@@ -25,6 +25,10 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function scopeIsActive($query) {
+        $query->where('status', 1);
+    }
+
     public function scopeFilter($query, $request) {
         if ($request->has('q')) {
             $query->where(function ($query) use ($request) {

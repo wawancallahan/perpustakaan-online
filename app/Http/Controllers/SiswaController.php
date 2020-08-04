@@ -310,4 +310,24 @@ class SiswaController extends Controller
 
         return redirect()->back();
     }
+
+    public function kartuAnggota($id)
+    {
+        $item = Siswa::isActive()->find($id);
+
+        if ($item === null) {
+            session()->flash('flash', [
+                'type' => 'danger',
+                'message' => 'Data tidak ditemukan/ Belum diaktifkan'
+            ]);
+
+            return redirect()->back();
+        }
+
+        $view = [
+            'item' => $item
+        ];
+
+        return view('print.kartu_anggota')->with($view);
+    }
 }
