@@ -43,4 +43,11 @@ class User extends Authenticatable
     public function siswa() {
         return $this->hasOne(Siswa::class, 'user_id');
     }
+
+    public function scopeFilter($query, $request) {
+        if ($request->has('q')) {
+            $query->where('name', 'LIKE', $request->get('q'))
+                    ->orWhere('username', 'LIKE', $request->get('q'));
+        }
+    }
 }

@@ -16,9 +16,9 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Siswa::paginate(10);
+        $items = Siswa::filter($request)->paginate(10);
 
         $view = [
             'items' => $items

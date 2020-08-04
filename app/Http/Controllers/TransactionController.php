@@ -10,12 +10,12 @@ use Exception;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $denda = Config::where('name', 'denda')->first()->value ?? 0;
 
-        $items = Transaction::with(['book', 'siswa'])->orderBy('status', 'asc')->orderBy('tanggal_kembali')->paginate(10);
-        
+        $items = Transaction::with(['book', 'siswa'])->filter($request)->orderBy('status', 'asc')->orderBy('tanggal_kembali')->paginate(10);
+
         $items->getCollection()->transform(function ($item) use ($denda) {
             $keterlambatan_hari = $item->tanggal_pinjam->startOfDay()->gt($item->tanggal_kembali) 
                                 ? $item->tanggal_pinjam->diff($item->tanggal_kembali->startOfDay())->days 

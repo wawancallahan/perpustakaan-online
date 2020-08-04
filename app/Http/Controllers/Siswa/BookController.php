@@ -13,9 +13,9 @@ use Carbon\Carbon;
 
 class BookController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = Book::isActive()->paginate(10);
+        $items = Book::filter($request)->isActive()->paginate(10);
 
         $view = [
             'items' => $items

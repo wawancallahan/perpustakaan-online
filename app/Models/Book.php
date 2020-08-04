@@ -18,6 +18,19 @@ class Book extends Model
         'created_by'
     ];
 
+    public function scopeFilter($query, $request) {
+        
+        if ($request->has('q')) {
+            $query->where(function ($query) use ($request) {
+                $query->where('isbn', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('judul', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('tahun', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('pengarang', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('penerbit', 'LIKE', '%' . $request->get('q') . '%');
+            });
+        }
+    }
+
     public function scopeIsActive($query) {
         return $query->where('active', 1);
     }

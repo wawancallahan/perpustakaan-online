@@ -25,6 +25,19 @@ class Siswa extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function scopeFilter($query, $request) {
+        if ($request->has('q')) {
+            $query->where(function ($query) use ($request) {
+                $query->where('nis', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('name', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('generation', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('class', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('phone', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('address', 'LIKE', '%' . $request->get('q') . '%');
+            });
+        }
+    }
+
     public function getStatusFormattedAttribute() {
         switch ($this->status) {
             case 0:

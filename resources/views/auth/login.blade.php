@@ -42,7 +42,7 @@
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label>NIS/ Username</label>
+                            <label>NIS atau Username</label>
                             <input type="text" name="username" class="form-control" placeholder="NIS/ Username" required>
                         </div>
                         <div class="form-group">

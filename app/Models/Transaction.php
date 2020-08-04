@@ -26,6 +26,26 @@ class Transaction extends Model
         return $query->where('siswa_id', auth()->user()->siswa->id);
     }
 
+    public function scopeFilter($query, $request) {
+        if ($request->has('q')) {
+            $query->where(function ($query) use ($request) {
+                $query->where('tanggal_pinjam', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere('tanggal_kembali', 'LIKE', '%' . $request->get('q') . '%')
+                    ->orWhere(function ($query) use ($request) {
+                        $query->orWhereHas('book', function ($query) use ($request) {
+                            $query->where('judul', 'LIKE', '%' . $request->get('q') . '%');
+                        });
+                    })
+                    ->orWhere(function ($query) use ($request) {
+                        $query->orWhereHas('siswa', function ($query) use ($request) {
+                            $query->where('nis', 'LIKE', '%' . $request->get('q') . '%')
+                                ->orWhere('name', 'LIKE', '%' . $request->get('q') . '%');
+                        });
+                    });
+            });
+        }
+    }
+
     public function book()
     {
         return $this->belongsTo(Book::class, 'book_id');

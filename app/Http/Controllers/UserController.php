@@ -15,9 +15,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = User::role(['petugas', 'admin', 'headmaster'])->paginate(10);
+        $items = User::filter($request)->role(['petugas', 'admin', 'headmaster'])->paginate(10);
 
         $view = [
             'items' => $items

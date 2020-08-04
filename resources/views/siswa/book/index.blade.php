@@ -36,6 +36,19 @@
                     <strong class="card-title">Daftar Buku</strong>
                 </div>
                 <div class="card-body">
+                    <div class="form-group">
+                        <form action="{{ url()->current() }}" method="GET">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-primary">Filter</button>
+                                </div>
+                                <input type="text" name="q" class="form-control" placeholder="Cari..." maxlength="255" value="{{ request()->get('q') }}">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i> Cari</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>

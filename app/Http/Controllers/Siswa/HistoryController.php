@@ -9,11 +9,11 @@ use App\Models\Config;
 
 class HistoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $denda = Config::where('name', 'denda')->first()->value ?? 0;
 
-        $items = Transaction::with(['book'])->onThisSiswa()->orderBy('status', 'asc')->orderBy('tanggal_kembali')->paginate(10);
+        $items = Transaction::with(['book'])->filter($request)->onThisSiswa()->orderBy('status', 'asc')->orderBy('tanggal_kembali')->paginate(10);
         
         $items->getCollection()->transform(function ($item) use ($denda) {
             $keterlambatan_hari = $item->tanggal_pinjam->gt($item->tanggal_kembali) 
