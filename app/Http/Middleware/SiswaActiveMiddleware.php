@@ -16,7 +16,7 @@ class SiswaActiveMiddleware
     public function handle($request, Closure $next)
     {
         if (auth()->user()->is_active == 0) {
-            return abort(404);
+            return response()->view('siswa.non_active');
         }
 
         return $next($request);
