@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
     {
         $rules = [
             'name' => 'required',
-            'username' => 'required',
+            'username' => 'required|regex:/^[A-Za-z][A-Za-z0-9]*$/',
             'role' => 'required'
         ];
 

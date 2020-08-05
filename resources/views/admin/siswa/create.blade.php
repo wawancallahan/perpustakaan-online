@@ -80,6 +80,11 @@
                         <hr>
 
                         <div class="form-group">
+                            <label class="form-control-label">Username</label>
+                            <input type="text" name="username" placeholder="Username" class="form-control" required >
+                        </div>
+
+                        <div class="form-group">
                             <label class="form-control-label">Password</label>
                             <input type="password" name="password" placeholder="Password" class="form-control" required >
                         </div>

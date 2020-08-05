@@ -43,7 +43,17 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'username';
+        $login = request()->input('username');
+
+        if(is_numeric($login)){
+            $field = 'nis';
+        } else {
+            $field = 'username';
+        }
+        
+        request()->merge([$field => $login]);
+
+        return $field;
     }
 
     public function logout(Request $request)

@@ -54,13 +54,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'nis' => 'required',
+            'nis' => 'required|numeric',
             'name' => 'required',
             'kelas_id' => 'required',
             'gender' => 'required',
             'phone' => 'required',
             'address' => 'nullable',
-            'username' => 'required',
+            'username' => 'required|regex:/^[A-Za-z][A-Za-z0-9]*$/',
             'password' => 'required'
         ]);
     }
@@ -77,7 +77,8 @@ class RegisterController extends Controller
             'name' => $data['name'], 
             'username' => $data['username'], 
             'password' => bcrypt($data['password']),
-            'is_active' => 0
+            'is_active' => 0,
+            'nis' => $data['nis']
         ]);
 
         $user->assignRole('siswa');

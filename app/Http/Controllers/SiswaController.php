@@ -66,11 +66,23 @@ class SiswaController extends Controller
                 return redirect()->back();
             }
 
+            $hasUsernameDuplicate = Username::where('username', $request->username)->count() > 0;
+
+            if ($hasUsernameDuplicate) {
+                session()->flash('flash', [
+                    'type' => 'danger',
+                    'message' => 'Username telah ada sebelumnya'
+                ]);
+
+                return redirect()->back();
+            }
+
             $user = User::create([
                 'name' => $request->name, 
-                'username' => $request->nis, 
+                'username' => $request->username, 
                 'password' => $request->password,
-                'is_active' => 0
+                'is_active' => 0,
+                'nis' => $request->nis,
             ]);
 
             Siswa::create([
@@ -157,6 +169,17 @@ class SiswaController extends Controller
 
             $item = Siswa::findOrFail($id);
 
+            $hasUsernameDuplicate = Username::where('username', $request->username)->whereNotIn('id', [$item->user->id])->count() > 0;
+
+            if ($hasUsernameDuplicate) {
+                session()->flash('flash', [
+                    'type' => 'danger',
+                    'message' => 'Username telah ada sebelumnya'
+                ]);
+
+                return redirect()->back();
+            }
+
             $item->update([
                 'nis' => $request->nis,
                 'name' => $request->name,
@@ -168,7 +191,8 @@ class SiswaController extends Controller
 
             $user = [
                 'name' => $request->name, 
-                'username' => $request->nis, 
+                'username' => $request->username,
+                'nis' => $request->nis, 
             ];
 
             if ($request->password !== null) {
