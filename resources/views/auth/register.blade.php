@@ -9,7 +9,7 @@
     <title>Register Perpustakaan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <<!-- CSRF Token -->
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.min.css') }}">
@@ -88,6 +88,11 @@
                         </div>
 
                         <hr>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Username</label>
+                            <input type="text" name="username" placeholder="Username" class="form-control" required >
+                        </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Password</label>

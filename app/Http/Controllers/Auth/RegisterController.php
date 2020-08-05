@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'gender' => 'required',
             'phone' => 'required',
             'address' => 'nullable',
+            'username' => 'required',
             'password' => 'required'
         ]);
     }
@@ -74,7 +75,7 @@ class RegisterController extends Controller
     {
         $user = User::create([
             'name' => $data['name'], 
-            'username' => $data['nis'], 
+            'username' => $data['username'], 
             'password' => bcrypt($data['password']),
             'is_active' => 0
         ]);
@@ -115,6 +116,17 @@ class RegisterController extends Controller
             session()->flash('flash', [
                 'type' => 'danger',
                 'message' => 'NIS telah ada sebelumnya'
+            ]);
+
+            return redirect()->back();
+        }
+
+        $hasUsernameDuplicate = User::where('username', $request->username)->count() > 0;
+
+        if ($hasUsernameDuplicate) {
+            session()->flash('flash', [
+                'type' => 'danger',
+                'message' => 'Username telah ada sebelumnya'
             ]);
 
             return redirect()->back();

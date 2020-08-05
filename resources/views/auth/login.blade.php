@@ -47,8 +47,8 @@
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label>NIS atau Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="NIS/ Username" required>
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control" placeholder="Username" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
