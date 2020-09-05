@@ -230,12 +230,21 @@ class SiswaController extends Controller
         DB::beginTransaction();
         
         try {
-            $item = Siswa::find($id);
+            $item = Siswa::withCount('transaction')->find($id);
 
             if ($item === null) {
                 session()->flash('flash', [
                     'type' => 'danger',
                     'message' => 'Data tidak ditemukan'
+                ]);
+
+                return redirect()->back();
+            }
+
+            if ($item->transaction_count > 0) {
+                session()->flash('flash', [
+                    'type' => 'danger',
+                    'message' => 'Tidak Dapat Menghapus Siswa Karena Memiliki History Peminjaman'
                 ]);
 
                 return redirect()->back();

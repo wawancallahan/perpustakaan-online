@@ -28,6 +28,10 @@ class Siswa extends Model
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }
 
+    public function transaction() {
+        return $this->hasMany(Transaction::class, 'siswa_id');
+    }
+
     public function scopeIsActive($query) {
         $query->where('status', 1);
     }
