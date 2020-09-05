@@ -66,7 +66,7 @@ class SiswaController extends Controller
                 return redirect()->back();
             }
 
-            $hasUsernameDuplicate = Username::where('username', $request->username)->count() > 0;
+            $hasUsernameDuplicate = User::where('username', $request->username)->count() > 0;
 
             if ($hasUsernameDuplicate) {
                 session()->flash('flash', [
@@ -169,7 +169,7 @@ class SiswaController extends Controller
 
             $item = Siswa::findOrFail($id);
 
-            $hasUsernameDuplicate = Username::where('username', $request->username)->whereNotIn('id', [$item->user->id])->count() > 0;
+            $hasUsernameDuplicate = User::where('username', $request->username)->whereNotIn('id', [$item->user->id])->count() > 0;
 
             if ($hasUsernameDuplicate) {
                 session()->flash('flash', [
