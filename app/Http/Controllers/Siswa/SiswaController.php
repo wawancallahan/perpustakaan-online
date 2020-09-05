@@ -16,6 +16,7 @@ class SiswaController extends Controller
         $today = Carbon::now();
 
         $transactionTelat = Transaction::with('book')
+                                        ->onThisSiswa()
                                         ->where('tanggal_kembali', '<=', $today->toDateString())
                                         ->get();
 
