@@ -29,7 +29,8 @@ class SiswaRequest extends FormRequest
             'kelas_id' => 'required',
             'gender' => 'required',
             'phone' => 'required',
-            'address' => 'nullable'
+            'address' => 'nullable',
+            'username' => 'required|regex:/^[A-Za-z][A-Za-z0-9]*$/',
         ];
 
         if ($this->isMethod('POST')) {

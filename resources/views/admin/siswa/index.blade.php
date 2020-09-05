@@ -87,7 +87,7 @@
                                                 <button type="button" data-link="{{ route('admin.siswa.unactive', $item->id) }}" class="btn btn-warning non-aktif btn-sm"><i class="fa fa-times"></i> NonAktifkan</button>
                                             @endif
                                             <a href="{{ route('admin.siswa.edit', $item->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                                            <button type="button" data-link="{{ route('admin.siswa.destroy', $item->id) }}" class="btn btn-danger btn-sm hapus">
+                                            <button type="button" data-link="{{ route('admin.siswa.destroy', [$item->id, $item->user_id]) }}" class="btn btn-danger btn-sm hapus">
                                                 <i class="fa fa-trash"></i> Hapus
                                             </button>
                                         </td>

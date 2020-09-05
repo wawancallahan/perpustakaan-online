@@ -225,7 +225,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $user_id)
     {
         DB::beginTransaction();
         
@@ -241,8 +241,8 @@ class SiswaController extends Controller
                 return redirect()->back();
             }
 
-            $user = User::where('username', $item->nis)->first();
-
+            $user = User::where('id', $user_id)->first();
+            
             $item->delete();
             $user->delete();
             

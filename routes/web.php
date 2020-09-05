@@ -31,7 +31,8 @@ Route::group(['middleware' => 'role:admin|petugas', 'prefix' => 'admin', 'as' =>
 
     Route::get('dashboard', 'AdminController@dashboard')->name('dashboard');
     Route::resource('book', 'BookController');
-    Route::resource('siswa', 'SiswaController');
+    Route::resource('siswa', 'SiswaController')->except('destroy');
+    Route::delete('siswa/{id}/{user_id}', 'SiswaController@destroy')->name('siswa.destroy');
     Route::resource('kelas', 'KelasController');
     Route::patch('siswa/{id}/active', 'SiswaController@active')->name('siswa.active');
     Route::patch('siswa/{id}/unactive', 'SiswaController@unactive')->name('siswa.unactive');
